@@ -59,7 +59,7 @@ function sendReminderMails() {
   
   let ui = SpreadsheetApp.getUi();
   let tastlistSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Tasklist');
-  let tasklist = tastlistSheet.getRange('A2:H').getValues();
+  let tasklist = tastlistSheet.getRange('A2:I').getValues();
   let contacts = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Contacts').getRange('A2:B').getValues();
   
   let reminderCount = 0;
@@ -74,11 +74,11 @@ function sendReminderMails() {
     let userName = task[4] != '' ? task[4] : '';
     let address = getUserMail(userName, contacts);
     let currentDate = new Date().toLocaleDateString(dateLocale);
-    let taskDate = task[7] != '' ? task[7].toLocaleDateString(dateLocale) : '';
+    let taskDate = task[8] != '' ? task[8].toLocaleDateString(dateLocale) : '';
     
     if (address && task[5] == '' && task[6] == 'Pending' && taskDate != currentDate) {
       
-      tastlistSheet.getRange('H' + (parseInt(index) + 2)).setValue(currentDate);
+      tastlistSheet.getRange('I' + (parseInt(index) + 2)).setValue(currentDate);
 
       let dateCreated = task[0].toLocaleDateString(dateLocale);
       let taskName = task[1];
