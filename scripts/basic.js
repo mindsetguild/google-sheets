@@ -14,6 +14,11 @@ function getDate() {
   return new Date().toLocaleDateString('cs-CZ');
 }
 
+// replaces idea command prefix from discord
+function replaceIdeaPrefix(idea) {
+  return idea.replace('!idea ', '');
+}
+
 // WIP
 function cancelPendingTask() {
   
