@@ -15,6 +15,20 @@ function getDate() {
 }
 
 // WIP
+function cancelPendingTask() {
+  
+  let ui = SpreadsheetApp.getUi();
+  let confirmation = ui.alert('Confirmation', 'Are you sure you want cancel selected task?', ui.ButtonSet.YES_NO);
+  
+  if (confirmation == ui.Button.YES) {
+    return true;
+  }
+  else {
+    ui.alert('Task remains active!');
+  }
+}
+
+// WIP
 function generateTaskIds() {
   
   let status = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Tasklist').getRange('G2:H').getValues();

@@ -55,9 +55,8 @@ function sendMail(address, subject, message) {
 }
 
 // send reminder mails to all users with pending tasks
-function sendReminderMails() {
+function sendReminderMails(ui) {
   
-  let ui = SpreadsheetApp.getUi();
   let tastlistSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Tasklist');
   let tasklist = tastlistSheet.getRange('A2:I').getValues();
   let contacts = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Contacts').getRange('A2:B').getValues();
@@ -100,9 +99,9 @@ function sendReminderMails() {
   ui.alert(reminderCount == 1 ? reminderCount + ' reminder have been sent!' : reminderCount + ' reminders have been sent');
 }
 
-function sendGlobalMail() {
+// send mail to everyone with set email address in contacts list
+function sendGlobalMail(ui) {
   
-  let ui = SpreadsheetApp.getUi();
   let playersSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Players');
   let subject = playersSheet.getRange('I17').getValue();
   let message = playersSheet.getRange("I18").getValue();
@@ -117,4 +116,22 @@ function sendGlobalMail() {
   } else {
     ui.alert('Missing subject or text!');
   }
+}
+
+// send reminder mails button trigger function
+function sendReminderMailsButton() {
+  
+  let ui = SpreadsheetApp.getUi();
+  let confirmation = ui.alert('Confirmation', 'Are you sure you want to send reminder emails?', ui.ButtonSet.YES_NO);
+  
+  confirmation == ui.Button.YES ? sendReminderMails(ui) : ui.alert('Cancelled!');
+}
+
+// send global guild mail button trigger function
+function sendGlobalMailButton() {
+  
+  let ui = SpreadsheetApp.getUi();
+  let confirmation = ui.alert('Confirmation', 'Are you sure you want to send global email?', ui.ButtonSet.YES_NO);
+  
+  confirmation == ui.Button.YES ? sendGlobalMail(ui) : ui.alert('Cancelled!');
 }
