@@ -19,7 +19,7 @@ function replaceIdeaPrefix(idea) {
   return idea.replace('!idea ', '');
 }
 
-// WIP
+// cancel pending task
 function cancelPendingTask() {
   
   let ui = SpreadsheetApp.getUi();
@@ -33,7 +33,7 @@ function cancelPendingTask() {
   }
 }
 
-// WIP
+// randomly generate task id
 function generateTaskIds() {
   
   let status = SpreadsheetApp.getActiveSpreadsheet().getSheetByName('Tasklist').getRange('G2:H').getValues();
